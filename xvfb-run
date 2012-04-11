@@ -28,7 +28,7 @@ set -e
 
 PROGNAME=xvfb-run
 SERVERNUM=0
-AUTHFILE=/root/.Xauthority
+AUTHFILE=~/.Xauthority
 ERRORFILE=/dev/null
 STARTWAIT=3
 XVFBARGS="-screen 0 1024x768x24"
@@ -145,10 +145,10 @@ fi
 
 # If the user did not specify an X authorization file to use, set up a temporary
 # directory to house one.
-if [ -z "$AUTHFILE" ]; then
-    XVFB_RUN_TMPDIR="$(mktemp --directory --tmpdir $PROGNAME.XXXXXX)"
-    AUTHFILE=$(mktemp -p "$XVFB_RUN_TMPDIR" Xauthority.XXXXXX)
-fi
+# if [ -z "$AUTHFILE" ]; then
+#     XVFB_RUN_TMPDIR="$(mktemp --directory --tmpdir $PROGNAME.XXXXXX)"
+#     AUTHFILE=$(mktemp -p "$XVFB_RUN_TMPDIR" Xauthority.XXXXXX)
+# fi
 
 # Start Xvfb.
 MCOOKIE=$(mcookie)
