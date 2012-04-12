@@ -133,10 +133,10 @@ if [ "$SHOWHELP" ]; then
     exit 0
 fi
 
-if [ -z "$*" ]; then
-    usage "need a command to run" >&2
-    exit 2
-fi
+# if [ -z "$*" ]; then
+#     usage "need a command to run" >&2
+#     exit 2
+# fi
 
 if ! which xauth >/dev/null; then
     error "xauth command not found"
