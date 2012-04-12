@@ -157,33 +157,6 @@ XAUTHORITY=$AUTHFILE xauth source - << EOF >>"$ERRORFILE" 2>&1
 add :$SERVERNUM $XAUTHPROTO $MCOOKIE
 EOF
 XAUTHORITY=$AUTHFILE Xvfb ":$SERVERNUM" $XVFBARGS $LISTENTCP >>"$ERRORFILE" \
-  2>&1 &
-
-exit $?
-
-XVFBPID=$!
-
-sleep "$STARTWAIT"
-
-# Start the command and save its exit status.
-set +e
-DISPLAY=:$SERVERNUM XAUTHORITY=$AUTHFILE "$@" 2>&1
-RETVAL=$?
-set -e
-
-# Kill Xvfb now that the command has exited.
-kill $XVFBPID
-
-# Clean up.
-XAUTHORITY=$AUTHFILE xauth remove ":$SERVERNUM" >"$ERRORFILE" 2>&1
-if [ -n "$XVFB_RUN_TMPDIR" ]; then
-    if ! rm -r "$XVFB_RUN_TMPDIR"; then
-        error "problem while cleaning up temporary directory"
-        exit 5
-    fi
-fi
-
-# Return the executed command's exit status.
-exit $RETVAL
+  2>&1
 
 # vim:set ai et sts=4 sw=4 tw=80:
